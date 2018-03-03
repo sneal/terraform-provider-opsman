@@ -12,9 +12,12 @@
 *.out
 
 # Terraform state
+.terraform/
 *.tfstate*
-/examples/terraform.tfstate
-/examples/terraform.tfstate.backup
+/examples/*/terraform.tfstate
+/examples/*/terraform.tfstate.backup
+terraform.tfvars
+terraform.log
 
 # OS X
 .DS_Store

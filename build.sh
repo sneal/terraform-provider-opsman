@@ -1,3 +1,7 @@
 #!/usr/bin/env bash
 
-go build -o $GOPATH/bin/terraform-provider-bosh
+if [[ -z "${GOPATH}" ]]; then
+  echo $GOPATH
+  export GOPATH="${PWD}/../../../.."
+fi
+go build -o "${GOPATH}/bin/terraform-provider-opsman"
