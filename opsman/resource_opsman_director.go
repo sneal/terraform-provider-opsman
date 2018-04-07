@@ -291,18 +291,27 @@ func resourceOpsmanDirectorUpdate(d *schema.ResourceData, meta interface{}) erro
 }
 
 func resourceOpsmanDirectorDelete(d *schema.ResourceData, meta interface{}) error {
-	log.Print("[INFO] Deleting opsman bosh director")
-	authedClient, err := createAuthedClient(d)
-	if err != nil {
-		return err
-	}
-	deleteInstallationService := api.NewInstallationAssetService(authedClient, nil, nil)
-	installationsService := api.NewInstallationsService(authedClient)
-	logWriter := omcmd.NewLogWriter(omWriter{})
-	logger := log.New(omWriter{}, "", 0)
-	delInstallationCmd := omcmd.NewDeleteInstallation(deleteInstallationService, installationsService, logWriter, logger, applySleepSeconds)
+	// Since there's no dependency between the director and network resources, those
+	// resources are getting destroyed before we can make/finish the destroy director
+	// API call to OpsMan.
 
-	return delInstallationCmd.Execute([]string{})
+	// For now just orphan the bosh director and anything it has deployed...
+	return nil
+
+	/*
+		log.Print("[INFO] Deleting opsman bosh director")
+		authedClient, err := createAuthedClient(d)
+		if err != nil {
+			return err
+		}
+		deleteInstallationService := api.NewInstallationAssetService(authedClient, nil, nil)
+		installationsService := api.NewInstallationsService(authedClient)
+		logWriter := omcmd.NewLogWriter(omWriter{})
+		logger := log.New(omWriter{}, "", 0)
+		delInstallationCmd := omcmd.NewDeleteInstallation(deleteInstallationService, installationsService, logWriter, logger, applySleepSeconds)
+
+		return delInstallationCmd.Execute([]string{})
+	*/
 }
 
 func configureOpsmanInitialAuth(d *schema.ResourceData) error {
