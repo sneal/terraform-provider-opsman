@@ -5,14 +5,14 @@ resource "aws_db_instance" "bosh" {
     engine                  = "mariadb"
     engine_version          = "10.1.19"
     iops                    = 1000
-    instance_class          = "db.m3.large"
+    instance_class          = "db.m4.large"
     name                    = "bosh"
     username                = "${var.rds_username}"
     password                = "${var.rds_password}"
     db_subnet_group_name    = "${aws_db_subnet_group.bosh_rds.name}"
     parameter_group_name    = "default.mariadb10.1"
     vpc_security_group_ids  = ["${aws_security_group.bosh_rds.id}"]
-    multi_az                = true
+    multi_az                = false
     backup_retention_period = 1
     apply_immediately       = true
     skip_final_snapshot     = true

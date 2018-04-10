@@ -19,5 +19,9 @@
 terraform.tfvars
 terraform.log
 
+# AWS Provider (Contains Creds)
+
+/examples/opsman/aws.tf
+
 # OS X
 .DS_Store

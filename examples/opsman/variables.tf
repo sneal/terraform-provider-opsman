@@ -31,23 +31,38 @@ variable "opsman_password" {
 }
 
 variable "opsman_ami" {
-  description = "OpsMan AMI - defaulted to OpsMan 2.1.0 in us-west-2 region"
-  default = "ami-5cd04f24"
+  type = "map"
+  default = {
+ "us-east-1" = "ami-21ee435c"
+ "us-east-2" = "ami-ae4575cb"
+ "us-west-1" = "ami-b24a5ad2"
+ "us-west-2" = "ami-7dbade05"
+ "us-gov-west-1" = "ami-025ecb63"
+ "ap-south-1" = "ami-d31530bc"
+ "eu-west-3" = "ami-cc06b0b1"
+ "eu-west-2" = "ami-ed05e48a"
+ "eu-west-1" = "ami-50a7f829"
+ "ap-northeast-2" = "ami-2d57f843"
+ "ap-northeast-1" = "ami-d7c5d2ab"
+ "sa-east-1" = "ami-d2590fbe"
+ "ca-central-1" = "ami-9e61e7fa"
+ "ap-southeast-1" = "ami-0ca5ff70"
+ "ap-southeast-2" = "ami-99a36dfb"
+ "eu-central-1" = "ami-82bfe069"
 }
-
-variable "opsman_username" {
-  description = "OpsMan instance admin username"
-  default = "admin"
 }
 
 variable "region" {
   description = "AWS region to use"
-  default = "us-west-2"
 }
 
 variable "az" {
   description = "AZ to use"
-  default = "us-west-2a"
+} 
+
+variable "opsman_username" {
+  description = "OpsMan instance admin username"
+  default = "admin"
 }
 
 variable "rds_username" {

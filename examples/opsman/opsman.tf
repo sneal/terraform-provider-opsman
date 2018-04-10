@@ -5,7 +5,7 @@ resource "opsman_installation_settings" "opsman" {
 }
 
 resource "aws_instance" "opsman" {
-  ami           = "${var.opsman_ami}"
+  ami           = "${lookup(var.opsman_ami, var.region)}"
   instance_type = "m4.large"
   key_name      = "${var.key_name}"
 
@@ -51,7 +51,7 @@ resource "opsman_director" "opsman" {
   }
 
   blobstore {
-    s3_endpoint = "https://s3.us-west-2.amazonaws.com"
+    s3_endpoint = "https://s3.us-east-2.amazonaws.com"
     bucket_name = "${aws_s3_bucket.bosh.id}"
   }
 
